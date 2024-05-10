@@ -47,6 +47,7 @@ class PokemonRepository @Inject constructor(
         }
         val newPokemons = mapper.mapResponseToPokemonList(response, infoDtoObjects)
         _pokemonList.addAll(newPokemons)
+        loadPokemonsOffset += newPokemons.size
     }
 
     override suspend fun loadPokemons() {

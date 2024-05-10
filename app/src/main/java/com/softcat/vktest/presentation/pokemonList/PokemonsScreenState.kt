@@ -7,5 +7,8 @@ sealed class PokemonsScreenState {
 
     data object Loading: PokemonsScreenState()
 
-    data class Content(val pokemons: List<Pokemon>): PokemonsScreenState()
+    data class Content(
+        val pokemons: List<Pokemon>,
+        val nextDataLoading: Boolean = false
+    ): PokemonsScreenState()
 }
