@@ -1,13 +1,11 @@
 package com.softcat.vktest.di.modules
 
-import com.softcat.vktest.data.implementations.PokemonRepository
-import com.softcat.vktest.domain.interfaces.PokemonRepositoryInterface
-import dagger.Binds
+import com.softcat.vktest.data.network.api.PokemonApiFactory
 import dagger.Module
+import dagger.Provides
 
 @Module
-interface DataModule {
-
-    @Binds
-    fun bindPokemonRepository(impl: PokemonRepository): PokemonRepositoryInterface
+class DataModule {
+    @Provides
+    fun provideApiService() = PokemonApiFactory.apiService
 }
