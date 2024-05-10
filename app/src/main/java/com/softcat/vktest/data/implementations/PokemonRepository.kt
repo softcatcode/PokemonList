@@ -4,12 +4,13 @@ import com.softcat.vktest.data.mappers.DtoMapper
 import com.softcat.vktest.data.network.api.PokemonApiService
 import com.softcat.vktest.domain.entities.Pokemon
 import com.softcat.vktest.domain.interfaces.PokemonRepositoryInterface
-import com.softcat.vktest.presentation.extensions.mergeWith
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -20,20 +21,21 @@ class PokemonRepository @Inject constructor(
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
+    private val _pokemonList = mutableListOf<Pokemon>()
+    private val pokemonList: List<Pokemon>
+        get() = _pokemonList.toList()
+
     private val loadPokemonsRequest = MutableSharedFlow<Unit>(replay = 1)
-    private val pokemonListUpdate = MutableSharedFlow< List<Pokemon> >()
     private val pokemonListFlow = flow {
         loadPokemonsRequest.emit(Unit)
         loadPokemonsRequest.collect {
             loadPokemonList()
             emit(pokemonList)
         }
+    }.retry(1) {
+        delay(RETRY_LOADING_TIMEOUT)
+        true
     }
-
-    private val _pokemonList = mutableListOf<Pokemon>()
-    private val pokemonList: List<Pokemon>
-        get() = _pokemonList.toList()
-
 
     private var loadPokemonsOffset = 0
 
@@ -56,14 +58,14 @@ class PokemonRepository @Inject constructor(
     }
 
     override fun getPokemonFlow() = pokemonListFlow
-        .mergeWith(pokemonListUpdate)
         .stateIn(
             scope = coroutineScope,
             started = SharingStarted.Lazily,
-            initialValue = listOf()
+            initialValue = pokemonList
         )
 
     companion object {
         private const val POKEMONS_PACK_SIZE = 10
+        private const val RETRY_LOADING_TIMEOUT = 1000L
     }
 }
