@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
 }
 
 android {
@@ -73,4 +74,8 @@ dependencies {
 
     // loading images
     implementation(libs.io.coil)
+
+    // di with dagger
+    implementation(libs.com.google.dagger)
+    kapt(libs.com.google.dagger.compilier)
 }

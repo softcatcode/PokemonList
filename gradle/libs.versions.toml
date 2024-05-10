@@ -11,7 +11,7 @@ composeBom = "2024.05.00"
 retrofitVersion = "2.9.0"
 okHttpLoggerVersion = "4.9.3"
 coilVersion = "2.1.0"
-
+daggerVersion = "2.51.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,6 +31,8 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 com-squareapp-retrofit = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 com-squareapp-okhttp = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttpLoggerVersion" }
 io-coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
+com-google-dagger = { group = "com.google.dagger", name = "dagger", version.ref = "daggerVersion" }
+com-google-dagger-compilier = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerVersion" }
 
 
 [plugins]
