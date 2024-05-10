@@ -6,5 +6,5 @@ import javax.inject.Inject
 class LoadPokemonsUseCase @Inject constructor(
     private val repository: PokemonRepositoryInterface
 ) {
-    operator fun invoke() = repository.loadPokemons()
+    suspend operator fun invoke() = repository.loadPokemons()
 }

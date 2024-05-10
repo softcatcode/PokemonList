@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface PokemonRepositoryInterface {
 
-    fun loadPokemons()
+    suspend fun loadPokemons()
 
     fun getPokemonFlow(): StateFlow< List<Pokemon> >
 }
