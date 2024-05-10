@@ -78,4 +78,7 @@ dependencies {
     // di with dagger
     implementation(libs.com.google.dagger)
     kapt(libs.com.google.dagger.compilier)
+
+    // navigation
+    implementation(libs.androidx.compose.navigation)
 }
