@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
 }
 
 android {
@@ -66,4 +67,18 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // working with network
+    implementation(libs.com.squareapp.retrofit)
+    implementation(libs.com.squareapp.okhttp)
+
+    // loading images
+    implementation(libs.io.coil)
+
+    // di with dagger
+    implementation(libs.com.google.dagger)
+    kapt(libs.com.google.dagger.compilier)
+
+    // navigation
+    implementation(libs.androidx.compose.navigation)
 }
