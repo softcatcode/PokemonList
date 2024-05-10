@@ -3,6 +3,7 @@ package com.softcat.vktest.data.network.api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 object PokemonApiFactory {
@@ -16,6 +17,7 @@ object PokemonApiFactory {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(PokemonApiService.API_LINK)
+        .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 

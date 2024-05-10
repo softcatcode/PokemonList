@@ -43,7 +43,8 @@ class PokemonRepository @Inject constructor(
             limit = POKEMONS_PACK_SIZE
         )
         val infoDtoObjects = response.pokemonList.map {
-            apiService.loadPokemonInfo(it.infoUrl)
+            val url = it.infoUrl.substring(PokemonApiService.API_LINK.length)
+            apiService.loadPokemonInfo(url)
         }
         val newPokemons = mapper.mapResponseToPokemonList(response, infoDtoObjects)
         _pokemonList.addAll(newPokemons)
