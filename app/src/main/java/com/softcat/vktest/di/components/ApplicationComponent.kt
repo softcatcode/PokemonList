@@ -11,5 +11,7 @@ import dagger.Component
 @Component(modules = [DomainModule::class, DataModule::class, ViewModelModule::class])
 interface ApplicationComponent {
 
+    fun getPokemonInfoComponentFactory(): PokemonInfoScreenComponent.Factory
+
     fun getViewModelFactory(): ViewModelFactory
 }
