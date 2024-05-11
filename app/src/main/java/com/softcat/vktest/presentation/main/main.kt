@@ -1,26 +1,26 @@
 package com.softcat.vktest.presentation.main
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.rememberNavController
 import com.softcat.vktest.presentation.navigation.AppNavGraph
+import com.softcat.vktest.presentation.navigation.NavigationState.Companion.rememberNavigationState
 import com.softcat.vktest.presentation.pokemonInfo.PokemonInfoScreen
 import com.softcat.vktest.presentation.pokemonList.PokemonListScreen
 
 @Composable
 fun PokemonAppMainScreen() {
-    val navController = rememberNavController()
+    val navState = rememberNavigationState()
 
     AppNavGraph(
-        navController = navController,
+        navController = navState.navController,
 
         pokemonListScreenContent = {
             PokemonListScreen { pokemon ->
-
+                navState.navigateToPokemonInfo(pokemon)
             }
         },
 
         pokemonInfoScreenContent = {
-            PokemonInfoScreen()
+            PokemonInfoScreen(it)
         }
     )
 }
