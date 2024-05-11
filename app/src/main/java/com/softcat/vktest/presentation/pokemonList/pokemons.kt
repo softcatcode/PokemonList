@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,9 +34,8 @@ import com.softcat.vktest.presentation.extensions.ProgressBar
 import com.softcat.vktest.presentation.extensions.getApplicationComponent
 
 @Composable
-@Preview
 fun PokemonCard(
-    pokemon: Pokemon = Pokemon("spider", infoUrl = "https://pokemons/spider", iconUrl = "https://pokemons_icons/spider.png"),
+    pokemon: Pokemon,
     pokemonClickedListener: (Pokemon) -> Unit = {}
 ) {
     val height = 90.dp
@@ -58,7 +56,7 @@ fun PokemonCard(
                     .padding(2.dp)
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.background),
-                model = pokemon.iconUrl,
+                model = pokemon.frontIconUrl,
                 contentDescription = "",
                 contentScale = ContentScale.Fit
             )

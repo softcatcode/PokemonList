@@ -8,9 +8,18 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Pokemon(
+    val id: Int,
     val name: String,
     val infoUrl: String,
-    val iconUrl: String
+    val frontIconUrl: String,
+    val backIconUrl: String,
+    val frontFemaleIconUrl: String,
+    val backFemaleIconUrl: String,
+    val types: List<PokemonType>,
+    val characteristics: List<PokemonCharacteristic>,
+    val experience: Int,
+    val weight: Int,
+    val height: Int
 ): Parcelable {
     companion object {
         val NavigationType = object: NavType<Pokemon>(isNullableAllowed = false) {
