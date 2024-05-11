@@ -85,4 +85,7 @@ dependencies {
 
     // for passing arguments to other screens
     implementation(libs.com.google.gson)
+
+    // observeAsState method
+    implementation(libs.androidx.compose.livedata)
 }
