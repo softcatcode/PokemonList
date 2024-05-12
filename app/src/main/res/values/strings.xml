@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VkTest</string>
+    <string name="pokemon_characteristics_label">Characteristics</string>
+    <string name="types_label">Types:</string>
 </resources>
