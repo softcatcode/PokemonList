@@ -13,7 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -32,19 +32,20 @@ import coil.compose.AsyncImage
 import com.softcat.vktest.domain.entities.Pokemon
 import com.softcat.vktest.presentation.extensions.ProgressBar
 import com.softcat.vktest.presentation.extensions.getApplicationComponent
+import com.softcat.vktest.ui.theme.PokemonIconCircle
 
 @Composable
 fun PokemonCard(
+    modifier: Modifier = Modifier,
     pokemon: Pokemon,
     pokemonClickedListener: (Pokemon) -> Unit = {}
 ) {
     val height = 90.dp
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
-            .background(Color.White),
-        onClick = { pokemonClickedListener(pokemon) }
+        modifier = modifier.height(height),
+        onClick = { pokemonClickedListener(pokemon) },
+        colors = CardDefaults.cardColors().copy(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -55,7 +56,7 @@ fun PokemonCard(
                     .size(height)
                     .padding(2.dp)
                     .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.background),
+                    .background(PokemonIconCircle),
                 model = pokemon.frontIconUrl,
                 contentDescription = "",
                 contentScale = ContentScale.Fit
@@ -82,10 +83,13 @@ fun PokemonList(
     loadNextCallback: () -> Unit = {}
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().padding(5.dp)
     ) {
         items(items = pokemons, key = { it.name } ) {pokemon ->
             PokemonCard(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .fillMaxWidth(),
                 pokemon = pokemon,
                 pokemonClickedListener = pokemonClickedListener
             )
