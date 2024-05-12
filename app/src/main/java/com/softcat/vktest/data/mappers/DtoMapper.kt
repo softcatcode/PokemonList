@@ -23,20 +23,23 @@ class DtoMapper @Inject constructor() {
         response: LoadPokemonsResponseDto,
         infoDtoObjects: List<PokemonInfoDto>
     ) = response.pokemonList.mapIndexed { index, model ->
-        val texture = infoDtoObjects[index].texture
+        val info = infoDtoObjects[index]
+        val texture = info.texture
         Pokemon(
-            id = model.id,
+            id = info.id,
             name = model.name,
             infoUrl = model.infoUrl,
             frontIconUrl = texture.frontDefault,
             backIconUrl = texture.backDefault,
             frontFemaleIconUrl = texture.frontFemale,
             backFemaleIconUrl = texture.backFemale,
-            types = mapPokemonTypeDtoToEntityList(model.types),
-            characteristics = mapPokemonCharacteristicDtoToEntityList(model.characteristics),
-            experience = model.experience,
-            weight = model.weight,
-            height = model.height
+            frontShinyIconUrl = texture.frontShiny,
+            backShinyIconUrl = texture.backShiny,
+            types = mapPokemonTypeDtoToEntityList(info.types),
+            characteristics = mapPokemonCharacteristicDtoToEntityList(info.characteristics),
+            experience = info.experience,
+            weight = info.weight,
+            height = info.height
         )
     }
 }
