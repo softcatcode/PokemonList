@@ -28,7 +28,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,21 +39,6 @@ import com.softcat.vktest.domain.entities.PokemonType
 import com.softcat.vktest.presentation.extensions.getApplicationComponent
 import androidx.compose.foundation.lazy.items
 import com.softcat.vktest.ui.theme.TypeLabel
-
-val defaultPokemon = Pokemon(
-    100,
-    "pokemon's name",
-    "infoUrl",
-    "frontIconUrl",
-    "backIconUrl",
-    "frontFemale",
-    "backFemale",
-    "frontShiny",
-    "backShiny",
-    listOf(PokemonType("type1"), PokemonType("type2"), PokemonType("type3")),
-    listOf(PokemonCharacteristic("name1", 123), PokemonCharacteristic("name2", 1000)),
-    1235, 305, 203
-)
 
 @Composable
 fun ImagePair(modifier: Modifier = Modifier, firstUrl: String?, secondUrl: String?) {
@@ -291,11 +275,8 @@ fun LazyListScope.pokemonData(pokemon: Pokemon) {
     }
 }
 
-@Preview
 @Composable
-fun PokemonInfoContent(
-    pokemon: Pokemon = defaultPokemon
-) {
+fun PokemonInfoContent(pokemon: Pokemon) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()

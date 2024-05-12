@@ -32,10 +32,15 @@ class PokemonRepository @Inject constructor(
             loadPokemonList()
             emit(pokemonList)
         }
-    }.retry(1) {
+    }.retry { throwable ->
+        errorFlow.emit(throwable.toString())
         delay(RETRY_LOADING_TIMEOUT)
         true
     }
+
+    private val errorFlow = MutableSharedFlow<String>(replay = 1)
+
+    override fun getErrorFlow() = errorFlow
 
     private var loadPokemonsOffset = 0
 

@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.softcat.vktest.domain.entities.Pokemon
+import com.softcat.vktest.presentation.extensions.ErrorScreen
 import com.softcat.vktest.presentation.extensions.ProgressBar
 import com.softcat.vktest.presentation.extensions.getApplicationComponent
 import com.softcat.vktest.ui.theme.PokemonIconCircle
@@ -70,7 +71,6 @@ fun PokemonCard(
             )
         }
     }
-
 }
 
 
@@ -83,7 +83,9 @@ fun PokemonList(
     loadNextCallback: () -> Unit = {}
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(5.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(5.dp)
     ) {
         items(items = pokemons, key = { it.name } ) {pokemon ->
             PokemonCard(
@@ -125,6 +127,12 @@ fun PokemonListScreen(
 
         is PokemonsScreenState.Loading -> {
             ProgressBar()
+        }
+
+        is PokemonsScreenState.Error -> {
+            ErrorScreen(currentState.message) {
+                viewModel.loadPokemonsPage()
+            }
         }
 
         is PokemonsScreenState.Content -> {
