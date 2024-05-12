@@ -18,7 +18,7 @@ val pokemonInfoArguments = listOf(
 @Composable
 fun LaunchPokemonInfo(navBackStackEntry: NavBackStackEntry, content: @Composable (Pokemon) -> Unit) {
     val args = navBackStackEntry.arguments ?: throw RuntimeException("NavBackStackEntry is null.")
-    val pokemon = Pokemon.NavigationType[args, Pokemon.NavigationType.name]
+    val pokemon = Pokemon.NavigationType[args, Screen.POKEMON_JSON_KEY]
         ?: throw RuntimeException("No pokemon in NavBackStackEntry.arguments.")
     content(pokemon)
 }

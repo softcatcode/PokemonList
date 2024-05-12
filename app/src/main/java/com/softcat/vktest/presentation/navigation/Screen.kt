@@ -12,7 +12,7 @@ sealed class Screen(val route: String) {
         fun getPathWithArgs(pokemon: Pokemon): String {
             val json = Gson().toJson(pokemon)
             val encoded = Uri.encode(json)
-            return "$POKEMON_INFO_ROUTE/$encoded"
+            return "$POKEMON_INFO_ROUTE_FOR_ARGS/$encoded"
         }
     }
 
@@ -20,6 +20,6 @@ sealed class Screen(val route: String) {
         private const val POKEMONS_LIST_ROUTE = "pokemon_list"
         const val POKEMON_JSON_KEY = "pokemon"
         private const val POKEMON_INFO_ROUTE_FOR_ARGS = "pokemon_info"
-        private const val POKEMON_INFO_ROUTE = "$POKEMON_INFO_ROUTE_FOR_ARGS/$POKEMON_JSON_KEY"
+        private const val POKEMON_INFO_ROUTE = "$POKEMON_INFO_ROUTE_FOR_ARGS/{$POKEMON_JSON_KEY}"
     }
 }
