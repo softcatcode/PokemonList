@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -81,4 +82,10 @@ dependencies {
 
     // navigation
     implementation(libs.androidx.compose.navigation)
+
+    // for passing arguments to other screens
+    implementation(libs.com.google.gson)
+
+    // observeAsState method
+    implementation(libs.androidx.compose.livedata)
 }
